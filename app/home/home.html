@@ -1,0 +1,30 @@
+<div class="home-container">
+    <div class="left-menu">
+        <div class="logo">
+            <i class="fa fa-cloud" aria-hidden="true"></i>
+        </div>
+        <div class="menu">
+            <p>NAVIGATION</p>
+            <a href="#!home">Home<i class="fa fa-home" aria-hidden="true"></i></a>
+            <a href="#!settings">Settings<i class="fa fa-cog" aria-hidden="true"></i></a>
+        </div>
+    </div>
+    <div class="informations-container">
+        <div class="top-bar">
+
+        </div>
+        <div class="informations">
+            <div ng-repeat="weather in data.weather track by $index" class="card-weather">
+                <div class="informations-icon">
+                    <img src='{{weather.weather}}'/>
+                </div>
+                <div class="informations-temp">
+                    <span>{{weather.temp}} °C</span>
+                </div>
+                <div class="informations-city">
+                    <span>{{weather.city}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

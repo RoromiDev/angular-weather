@@ -1,0 +1,5 @@
+/* app css stylesheet */
+
+html, body, .ng-scope, .container-fluid, .row {
+  height: 100%;
+}
