@@ -2,7 +2,7 @@
 
 angular.module('weather')
 
-    .factory('citiesFactory', ['$interval', '$http', '$rootScope', '$timeout', '$q', function($interval, $http, $rootScope, $timeout, $q) {
+    .factory('citiesFactory', ['$interval', '$http', '$rootScope', '$timeout', '$q', function ($interval, $http, $rootScope, $timeout, $q) {
 
         var cities = ['Montpellier', 'Bastia', 'Ajaccio'];
         var weather = [];
@@ -15,33 +15,40 @@ angular.module('weather')
                 http.push($http.get('http://api.openweathermap.org/data/2.5/weather?q=' + cities[i] + '&units=metric&appid=23ea05fc73c2b86f12eed0a28e32f277'));
             }
 
-            $q.all(http).then(function(values) {
+            $q.all(http).then(function (values) {
                 for (var i = 0; i < values.length; i++) {
-                    weather.push({city: values[i].data.name, temp: parseInt(values[i].data.main.temp), weather: 'http://openweathermap.org/img/w/' + values[i].data.weather[0].icon + '.png', coords: values[i].data.coord});
+                    weather.push({
+                        city: values[i].data.name,
+                        temp: parseInt(values[i].data.main.temp),
+                        weather: 'http://openweathermap.org/img/w/' + values[i].data.weather[0].icon + '.png',
+                        coords: values[i].data.coord
+                    });
                 }
                 $rootScope.$emit("weather", weather);
+            }, function (errors) {
+                console.log(errors);
             });
         }
 
         getWeather();
 
         // Refresh data every minute
-        $interval(function() {
+        $interval(function () {
             getWeather();
         }, 60000);
 
         return {
-            addCities: function(city){
+            addCities: function (city) {
                 cities.push(city);
                 getWeather();
             },
 
-            removeCities: function(index){
+            removeCities: function (index) {
                 cities.splice(index, 1);
                 getWeather();
             },
 
-            getWeather: function(){
+            getWeather: function () {
                 return weather;
             }
         }

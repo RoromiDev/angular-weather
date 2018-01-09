@@ -2164,7 +2164,7 @@ angular.mock.$RootElementProvider = function() {
  * @name $controller
  * @description
  * A decorator for {@link ng.$controller} with additional `bindings` parameter, useful when testing
- * controllers of directives that use {@link $compile#-bindtocontroller- `bindToController`}.
+ * controllers of templates that use {@link $compile#-bindtocontroller- `bindToController`}.
  *
  * Depending on the value of
  * {@link ng.$compileProvider#preAssignBindingsEnabled `preAssignBindingsEnabled()`}, the properties
@@ -2283,14 +2283,14 @@ angular.mock.$ComponentControllerProvider = ['$compileProvider',
     function ComponentControllerProvider($compileProvider) {
   this.$get = ['$controller','$injector', '$rootScope', function($controller, $injector, $rootScope) {
     return function $componentController(componentName, locals, bindings, ident) {
-      // get all directives associated to the component name
+      // get all templates associated to the component name
       var directives = $injector.get(componentName + 'Directive');
-      // look for those directives that are components
+      // look for those templates that are components
       var candidateDirectives = directives.filter(function(directiveInfo) {
         // components have controller, controllerAs and restrict:'E'
         return directiveInfo.controller && directiveInfo.controllerAs && directiveInfo.restrict === 'E';
       });
-      // check if valid directives found
+      // check if valid templates found
       if (candidateDirectives.length === 0) {
         throw new Error('No component found');
       }
