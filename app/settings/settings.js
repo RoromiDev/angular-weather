@@ -2,45 +2,27 @@
 
 angular.module('weather')
 
-    .controller('settingsCtrl', ['$scope', 'citiesFactory', '$http', '$interval',
-        function ($scope, citiesFactory, $http, $interval) {
+    .controller('settingsCtrl', ['$scope', 'citiesFactory', '$rootScope', '$interval',
+        function ($scope, citiesFactory, $rootScope, $interval) {
             $scope.data = {
-                state: 1,
-                cities: citiesFactory.getCities(),
-                values: '',
-                weather: [],
+                weather: citiesFactory.getWeather(),
                 city: ''
             };
 
-            $scope.getData = function () {
-                for (var i = 0; i < $scope.data.cities.length; i++) {
-                    $http.get('http://api.openweathermap.org/data/2.5/weather?q=' + $scope.data.cities[i] + '&units=metric&appid=23ea05fc73c2b86f12eed0a28e32f277')
-                        .then(function (success) {
-                            $scope.data.weather.push({city: success.data.name, temp: parseInt(success.data.main.temp), weather: 'http://openweathermap.org/img/w/' + success.data.weather[0].icon + '.png'});
-                            console.log($scope.data.weather);
-                        }, function (error) {
-                            console.log(error);
-                        });
-                }
+            $rootScope.$on('weather', function (event, args) {
+                $scope.updateWeather(args);
+            });
+
+            $scope.updateWeather = function (newweather) {
+                $scope.data.weather = newweather;
             };
 
-            $scope.removeCity = function(index) {
-                $scope.data.cities.splice(index, 1);
-                $scope.data.weather.splice(index, 1);
-                citiesFactory.setCities($scope.data.cities);
+            $scope.removeCity = function (index) {
+                citiesFactory.removeCities(index);
             };
 
-            $scope.updateState = function(state) {
-                $scope.data.state = state;
+            $scope.addCity = function () {
+                citiesFactory.addCities($scope.data.city);
             };
-
-            $scope.addCity = function() {
-                $scope.data.cities.push($scope.data.city);
-                citiesFactory.setCities($scope.data.cities);
-                $scope.data.weather = [];
-                $scope.getData();
-            };
-
-            $scope.getData();
         }
     ]);

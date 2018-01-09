@@ -11,16 +11,11 @@
     </div>
     <div class="informations-container">
         <div class="top-bar">
-            <div class="bar-actions">
-                <a ng-click="updateState(1)">Add widget</a>
-            </div>
-            <div class="bar-actions">
-                <a ng-click="updateState(2)">Remove widget</a>
-            </div>
+            
         </div>
         <div class="informations">
             <div ng-repeat="weather in data.weather track by $index" class="card-weather">
-                <a ng-if="data.state == 2" ng-click="removeCity($index)"><i style="color: red" class="fa fa-times" aria-hidden="true"></i></a>
+                <a ng-click="removeCity($index)"><i style="color: red" class="fa fa-times" aria-hidden="true"></i></a>
                 <div class="informations-icon">
                     <img src='{{weather.weather}}'/>
                 </div>
@@ -31,7 +26,7 @@
                     <span>{{weather.city}}</span>
                 </div>
             </div>
-            <div ng-if="data.state == 1" class="card-add">
+            <div class="card-add">
                 <a data-toggle="modal" data-target="#exampleModal"><i style="color: green" class="fa fa-plus-circle fa-3x" aria-hidden="true"></i></a>
             </div>
             <!-- Modal -->
