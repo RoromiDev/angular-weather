@@ -2,25 +2,25 @@
 
 angular.module('weather')
 
-    .factory('citiesFactory', ['$interval', '$http', '$rootScope', '$timeout', function($interval, $http, $rootScope, $timeout) {
+    .factory('citiesFactory', ['$interval', '$http', '$rootScope', '$timeout', '$q', function($interval, $http, $rootScope, $timeout, $q) {
 
         var cities = ['Montpellier', 'Bastia', 'Ajaccio'];
         var weather = [];
 
         function getWeather() {
-            console.log(cities);
+            var http = [];
             weather = [];
+
             for (var i = 0; i < cities.length; i++) {
-                $http.get('http://api.openweathermap.org/data/2.5/weather?q=' + cities[i] + '&units=metric&appid=23ea05fc73c2b86f12eed0a28e32f277')
-                    .then(function (success) {
-                        weather.push({city: success.data.name, temp: parseInt(success.data.main.temp), weather: 'http://openweathermap.org/img/w/' + success.data.weather[0].icon + '.png'});
-                    }, function (error) {
-                        console.log(error);
-                    });
+                http.push($http.get('http://api.openweathermap.org/data/2.5/weather?q=' + cities[i] + '&units=metric&appid=23ea05fc73c2b86f12eed0a28e32f277'));
             }
-            $timeout(function () {
+
+            $q.all(http).then(function(values) {
+                for (var i = 0; i < values.length; i++) {
+                    weather.push({city: values[i].data.name, temp: parseInt(values[i].data.main.temp), weather: 'http://openweathermap.org/img/w/' + values[i].data.weather[0].icon + '.png'});
+                }
                 $rootScope.$emit("weather", weather);
-            }, 1000);
+            });
         }
 
         getWeather();

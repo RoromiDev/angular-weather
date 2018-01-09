@@ -1,6 +1,6 @@
 <div class="home-container">
     <div class="left-menu">
-        <div class="logo">
+        <div class="logo column-center">
             <i class="fa fa-cloud" aria-hidden="true"></i>
         </div>
         <div class="menu">
@@ -11,42 +11,43 @@
     </div>
     <div class="informations-container">
         <div class="top-bar">
-            
+            <span>Settings</span>
         </div>
         <div class="informations">
             <div ng-repeat="weather in data.weather track by $index" class="card-weather">
-                <a ng-click="removeCity($index)"><i style="color: red" class="fa fa-times" aria-hidden="true"></i></a>
-                <div class="informations-icon">
+                <a ng-click="removeCity($index)"><i style="color: #e53935" class="fa fa-times" aria-hidden="true"></i></a>
+                <div class="informations-icon column-center">
                     <img src='{{weather.weather}}'/>
                 </div>
-                <div class="informations-temp">
+                <div class="informations-temp column-center">
                     <span>{{weather.temp}} °C</span>
                 </div>
-                <div class="informations-city">
+                <div class="informations-city column-center">
                     <span>{{weather.city}}</span>
                 </div>
             </div>
-            <div class="card-add">
-                <a data-toggle="modal" data-target="#exampleModal"><i style="color: green" class="fa fa-plus-circle fa-3x" aria-hidden="true"></i></a>
+            <div class="card-add column-center">
+                <a data-toggle="modal" data-target="#exampleModal"><i style="color: #43a047" class="fa fa-plus-circle fa-3x" aria-hidden="true"></i></a>
             </div>
+
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Entrer la ville</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Add a city</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="input-group input-group-sm mb-3">
+                        <div class="input-group input-group-sm">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Ville</span>
+                                <span class="input-group-text" id="inputGroup-sizing-sm">City</span>
                             </div>
                             <input ng-model="data.city" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                         </div>
                         <div class="modal-footer">
-                            <button ng-click="addCity()" type="button" class="btn btn-primary" data-dismiss="modal">Ajouter</button>
+                            <button ng-click="addCity()" style="background-color: rgb(42, 54, 86); border-color: rgb(42, 54, 86);" type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
                         </div>
                     </div>
                 </div>
