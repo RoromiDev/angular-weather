@@ -1,6 +1,6 @@
 # Angular-weather
 
-Faites vos comptes simplement
+Le dashboard météo
 
 ## Mise en route
 
