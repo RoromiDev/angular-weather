@@ -15,6 +15,10 @@ angular.module('weather', [
                 templateUrl: 'home/home.html',
                 controller: 'homeCtrl'
             })
+            .when('/map', {
+                templateUrl: 'map/map.html',
+                controller: 'mapCtrl'
+            })
             .otherwise({
                 redirectTo: '/home'
             });

@@ -17,7 +17,7 @@ angular.module('weather')
 
             $q.all(http).then(function(values) {
                 for (var i = 0; i < values.length; i++) {
-                    weather.push({city: values[i].data.name, temp: parseInt(values[i].data.main.temp), weather: 'http://openweathermap.org/img/w/' + values[i].data.weather[0].icon + '.png'});
+                    weather.push({city: values[i].data.name, temp: parseInt(values[i].data.main.temp), weather: 'http://openweathermap.org/img/w/' + values[i].data.weather[0].icon + '.png', coords: values[i].data.coord});
                 }
                 $rootScope.$emit("weather", weather);
             });

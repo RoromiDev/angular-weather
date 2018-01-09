@@ -12,20 +12,10 @@
     </div>
     <div class="informations-container">
         <div class="top-bar">
-            <span>Home</span>
+            <span>Map</span>
         </div>
-        <div class="informations">
-            <div ng-repeat="weather in data.weather track by $index" class="card-weather">
-                <div class="informations-icon column-center">
-                    <img src='{{weather.weather}}'/>
-                </div>
-                <div class="informations-temp column-center">
-                    <span>{{weather.temp}} °C</span>
-                </div>
-                <div class="informations-city column-center">
-                    <span>{{weather.city}}</span>
-                </div>
-            </div>
+        <div class="informations" style="padding: 0">
+            <div id="map"></div>
         </div>
     </div>
 </div>

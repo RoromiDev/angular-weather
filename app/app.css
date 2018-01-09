@@ -142,3 +142,8 @@ html, body, .ng-scope, .container-fluid, .row {
     margin: 0 !important;
     padding: 15px;
 }
+
+#map {
+    height: 100%;
+    width: 100%;
+}
